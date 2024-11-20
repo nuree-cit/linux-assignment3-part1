@@ -12,6 +12,11 @@ DATE=$(date +"%d/%m/%Y")
 PACKAGE_COUNT=$(pacman -Q | wc -l)
 OUTPUT_DIR="/var/lib/webgen/HTML"
 OUTPUT_FILE="$OUTPUT_DIR/index.html"
+HOSTNAME=$(cat /etc/hostname)
+RAW_DISK_USAGE=$(df -h | grep "^/dev" )
+DISK_USAGE=$(echo "$RAW_DISK_USAGE" | awk '{print $3 "/" $2}')
+
+
 
 # Ensure the target directory exists
 if [[ ! -d "$OUTPUT_DIR" ]]; then
@@ -34,6 +39,8 @@ cat <<EOF > "$OUTPUT_FILE"
     <p><strong>Operating System:</strong> $OS_NAME</p>
     <p><strong>Date:</strong> $DATE</p>
     <p><strong>Number of Installed Packages:</strong> $PACKAGE_COUNT</p>
+    <p><strong>Disk Usage:</strong> $DISK_USAGE</p>
+    <p><strong>Hostname:</strong> $HOSTNAME</p>
 </body>
 </html>
 EOF
