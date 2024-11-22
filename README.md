@@ -364,6 +364,7 @@ Hostname: bob
 ```
 
 4. the challenge that I encountered
+
 I wanted to show disk usage with following format:
 ```
 Disk Usage:  2.6G/25G
